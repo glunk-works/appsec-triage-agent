@@ -1,0 +1,55 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "appsec-triage-agent"
+dynamic = ["version"]
+description = ''
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "Jared Groves", email = "jgroves27@gmail.com" },
+]
+classifiers = [
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+]
+dependencies = []
+
+[project.urls]
+Documentation = "https://github.com/glunk-works/appsec-triage-agent#readme"
+Issues = "https://github.com/glunk-works/appsec-triage-agent/issues"
+Source = "https://github.com/glunk-works/appsec-triage-agent"
+
+[tool.hatch.version]
+path = "src/appsec_triage_agent/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/appsec_triage_agent tests}"
+
+[tool.coverage.run]
+source_pkgs = ["appsec_triage_agent", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/appsec_triage_agent/__about__.py",
+]
+
+[tool.coverage.paths]
+appsec_triage_agent = ["src/appsec_triage_agent", "*/appsec-triage-agent/src/appsec_triage_agent"]
+tests = ["tests", "*/appsec-triage-agent/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
